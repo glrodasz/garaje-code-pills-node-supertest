@@ -9,7 +9,7 @@ router.post("/", createMovie);
 router.put("/:id", updateMovie);
 router.delete("/:id", deleteMovie);
 
-module.exports = router;
+module.exports = (app) => app.use("/movies", router);
 
 let movies = loadMovies();
 
