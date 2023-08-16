@@ -9,7 +9,7 @@ router.post("/", createMovie);
 router.put("/:id", updateMovie);
 router.delete("/:id", deleteMovie);
 
-module.exports = router;
+module.exports = (app) => app.use("/movies", router);
 
 let movies = loadMovies();
 
@@ -19,13 +19,12 @@ function getMovies(req, res) {
 
 function getMovie(req, res) {
   const movieId = parseInt(req.params.id, 10);
-  const movieIndex = movies.findIndex((m) => m.id === movieId);
+  const movieIndex = movies.findIndex((m) => m.id === movieId);8
 
   if (movieIndex === -1) {
     return res.status(404).json({ error: "Movie not found" });
   }
 
-  saveMovies(movies);
   res.json(movies[movieIndex]);
 }
 
